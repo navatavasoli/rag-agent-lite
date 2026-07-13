@@ -1,0 +1,4 @@
+.venv/
+qdrant_db/
+docs/*.pdf
+.ipynb_checkpoints/

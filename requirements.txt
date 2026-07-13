@@ -1,0 +1,6 @@
+langchain-ollama
+langchain-huggingface
+langchain-qdrant
+langchain-text-splitters
+qdrant-client
+pymupdf4llm
