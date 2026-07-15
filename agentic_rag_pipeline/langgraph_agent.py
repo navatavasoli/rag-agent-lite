@@ -58,6 +58,30 @@ def generate_node(state: GraphState) -> dict:
     response = llm_with_tools.invoke(state["messages"])
     return {"answer": response.content}
 
+
+def grade_node(state: GraphState) -> dict:
+    
+
+
+    '''
+    
+    prompt = f"""You are grading whether an answer is well-supported and internally consistent.
+
+Question: {state["question"]}
+Answer: {state["answer"]}
+
+Respond with exactly one word: "sufficient" if the answer is consistent and directly answers the question, or "insufficient" if the answer is contradictory, evasive, or does not answer the question.
+
+Respond with only that one word. Do not explain your reasoning."""
+    
+    '''
+
+
+    # 1. Build a prompt using state["question"] and state["answer"]
+    #    Instruct the LLM to respond with only "sufficient" or "insufficient"
+    # 2. Call llm.invoke(prompt) — plain llm, not llm_with_tools
+    # 3. Return {"grade": response.content.strip().lower()}
+
 graph_builder = StateGraph(GraphState)
 
 graph_builder.add_node("agent", agent_node)
