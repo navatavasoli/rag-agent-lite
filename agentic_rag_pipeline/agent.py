@@ -14,7 +14,7 @@ vector_store = QdrantVectorStore(client=client, collection_name=COLLECTION_NAME,
 @tool
 def retrieve(query: str) -> str:
     """Search the document library, return relevant passages for the given query."""
-    results = vector_store.similarity_search(query, k = 2)
+    results = vector_store.similarity_search(query, k = 3)
     return "\n\n".join(doc.page_content for doc in results)
 
 #result = retrieve.invoke("who is the cousin of juliet capulet")
