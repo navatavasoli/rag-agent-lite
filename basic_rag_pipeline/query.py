@@ -13,7 +13,7 @@ vector_store = QdrantVectorStore(client=client, collection_name=COLLECTION_NAME,
 
 
 # retrieval
-query = "what is the main philosophical problem in the myth of sisyphus"
+query = "how did romeo die"
 results = vector_store.similarity_search(query, k = 3)
 
 for i, doc in enumerate(results):
@@ -23,7 +23,7 @@ for i, doc in enumerate(results):
 
 llm = ChatOllama(model = "qwen3:4b-instruct-2507-q4_K_M")
 context = "\n\n".join(doc.page_content for doc in results)
-prompt = f"""Answer the question using only the context below. If the context doesn't contain the answer, explicitly state this.
+prompt = f"""Answer the question using only the context below. If the context doesn't contain the answer, come up with the next best answer that you can.
 Context: {context}
 
 Question: {query}
