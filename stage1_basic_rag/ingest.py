@@ -21,6 +21,11 @@ for pdf_path in BOOKS:
     chunks = splitter.split_text(markdown_text)
     all_chunks.extend(chunks)
     #all_metadatas.extend([{"source": pdf_path}] * len(chunks))
+    print(f"Processing {pdf_path}...")
+    markdown_text = pymupdf4llm.to_markdown(pdf_path)
+    chunks = splitter.split_text(markdown_text)
+    all_chunks.extend(chunks)
+    print(f"  -> {len(chunks)} chunks")
 
 # embed
 embeddings = HuggingFaceEmbeddings(model_name = "sentence-transformers/all-mpnet-base-v2")
