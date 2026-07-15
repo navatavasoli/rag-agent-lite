@@ -3,7 +3,15 @@ from langchain_qdrant import QdrantVectorStore
 from qdrant_client import QdrantClient
 from langchain_ollama import ChatOllama 
 from langchain_core.tools import tool
-from langchain_core.messages import HumanMessage, AIMessage, ToolMessage
+from langchain_core.messages import HumanMessage, AIMessage, ToolMessage, BaseMessage
+from typing import TypedDict
+from langgraph.graph import StateGraph, START, END
+
+class GraphState(TypedDict):
+    question: str
+    messages: list[BaseMessage]
+    answer: str
+    retry_count: int
 
 embeddings = HuggingFaceEmbeddings(model_name="sentence-transformers/all-mpnet-base-v2")
 client = QdrantClient(path="qdrant_db")
@@ -25,10 +33,15 @@ llm = ChatOllama(model = "qwen3:4b-instruct-2507-q4_K_M")
 llm_with_tools = llm.bind_tools([retrieve])
 #prompt = "who is the cousin of juliet capulet? is it tybalt?"
 #response = llm.invoke(prompt)
-response = llm_with_tools.invoke("who is juliet capulet's cousin?")
+response = llm_with_tools.invoke("was nikki in love with bear?")
 
-question = "who is juliet capulet's cousin"
+question = "was nikki in love with bear?"
 messages = [HumanMessage(content = question), response]
+
+def agent_note(state: GraphState) -> dict:
+    response = llm_with_tools.invoke(state["messages"])
+    return {"messages": state["messages"] + [response]}
+
 
 for call in response.tool_calls:
     tool_result = retrieve.invoke(call["args"])

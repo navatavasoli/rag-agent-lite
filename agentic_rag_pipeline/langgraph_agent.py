@@ -80,8 +80,8 @@ graph_builder.add_edge("generate", END)   # temporary — go straight to END for
 graph = graph_builder.compile()
 
 initial_state = {
-    "question": "who is juliet capulet's cousin",
-    "messages": [HumanMessage(content="who is juliet capulet's cousin")],
+    "question": "was nikki in love with bear?",
+    "messages": [HumanMessage(content="was nikki in love with bear?")],
     "answer": "",
     "retry_count": 0,
     "grade": "",
