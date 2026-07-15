@@ -7,7 +7,7 @@ from qdrant_client.models import Distance, VectorParams
 from pathlib import Path
 
 # text extraction
-BOOKS = ["docs/sisyphus.pdf", "docs/romeo_and_juliet.pdf", "docs/the_48_laws.pdf"]
+BOOKS = ["docs/sisyphus.pdf", "docs/romeo_and_juliet.pdf", "docs/the_48_laws.pdf", "docs/into_thin_air.pdf", "docs/obsession.pdf"]
 
 #markdown_text = pymupdf4llm.to_markdown(BOOKS)
 

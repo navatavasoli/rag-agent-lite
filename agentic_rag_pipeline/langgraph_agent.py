@@ -58,6 +58,8 @@ def generate_node(state: GraphState) -> dict:
     response = llm_with_tools.invoke(state["messages"])
     return {"answer": response.content}
 
+graph_builder = StateGraph(GraphState)
+
 graph_builder.add_node("agent", agent_node)
 graph_builder.add_node("retrieve", retrieve_node)
 graph_builder.add_node("generate", generate_node)
